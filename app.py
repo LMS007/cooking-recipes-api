@@ -38,7 +38,7 @@ deleteRecipeInput = fastjsonschema.compile({
     },
     "required": ['_id']
 })
-
+ 
 insertRecipeSchema = {
     'type': 'object',
     'additionalProperties': False,
@@ -50,18 +50,70 @@ insertRecipeSchema = {
         'ingredients': {
             'type': 'array',
             'default': [],
+            'additionalProperties': False,
             'items': {
-                "type": "object",
-                "properties": {
-                    "milliliters": {
-                        'type': 'number', 
-                        'default': 0,
+                'anyOf': [
+                    {
+                        'type': 'object',
+                        "required": ["tsp", "foodItem"],
+                        'additionalProperties': False,
+                        'properties': {
+                             "tsp": {
+                                'type': 'number', 
+                                'default': 1,
+                            },
+                            "foodItem":{
+                                'type': 'string', 
+                                'default': '',
+                            }
+                        }
                     },
-                    "foodItem":{
-                        'type': 'string', 
-                        'default': '',
-                    }
-                }
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        "required": ["tbsp", "foodItem"],
+                        'properties': {
+                             "tbsp": {
+                                'type': 'number', 
+                                'default': 1,
+                            },
+                            "foodItem":{
+                                'type': 'string', 
+                                'default': '',
+                            }
+                        }
+                    },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        "required": ["cups", "foodItem"],
+                        'properties': {
+                             "cups": {
+                                'type': 'number', 
+                                'default': 1,
+                            },
+                            "foodItem":{
+                                'type': 'string', 
+                                'default': '',
+                            }
+                        }
+                    },
+                    {
+                        'type': 'object',
+                        'additionalProperties': False,
+                        "required": ["quantity", "foodItem"],
+                        'properties': {
+                             "quantity": {
+                                'type': 'number', 
+                                'default': 1,
+                            },
+                            "foodItem":{
+                                'type': 'string', 
+                                'default': '',
+                            }
+                        }
+                    },
+                ]
             }
         },
         'instructions': {
