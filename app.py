@@ -181,7 +181,7 @@ def recipe():
         except Exception as e:
             return str(e), 400
     
-    if request.method == 'PUT':
+    if request.method == 'POST':
         try:
             json_data = request.get_json()
             timestamp = datetime.datetime.utcnow()
@@ -195,7 +195,7 @@ def recipe():
         except Exception as e:
             return str(e), 400
         
-    if request.method == 'POST':
+    if request.method == 'PUT':
         try:
             json_data = request.get_json()
             updateRecipeInput(json_data)  # validate
